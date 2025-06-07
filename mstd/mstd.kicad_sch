@@ -2747,16 +2747,6 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 121.92) (xy 177.8 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "03fbf4c6-b6c6-4207-9bc0-9368dae2c23e")
-	)
-	(wire
-		(pts
 			(xy 187.96 102.87) (xy 191.77 102.87)
 		)
 		(stroke
@@ -2874,16 +2864,6 @@
 			(type default)
 		)
 		(uuid "16ed8a82-0fa6-4a3b-a523-6e04b6363b8e")
-	)
-	(wire
-		(pts
-			(xy 69.85 140.97) (xy 142.24 140.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "17c02cc3-fd9f-4e0f-9e98-014b559a6491")
 	)
 	(wire
 		(pts
@@ -3594,6 +3574,16 @@
 			(type default)
 		)
 		(uuid "7252f441-ef5d-4243-b391-a7eb266afea0")
+	)
+	(wire
+		(pts
+			(xy 69.85 121.92) (xy 177.8 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7327dabb-0d7c-4c1a-81e4-85809cb2ced1")
 	)
 	(wire
 		(pts
@@ -4394,6 +4384,16 @@
 			(type default)
 		)
 		(uuid "f4d7e55a-354a-4171-85e1-9b6238e40061")
+	)
+	(wire
+		(pts
+			(xy 69.85 140.97) (xy 142.24 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f508e050-6dfd-4db9-a359-b67deba998f4")
 	)
 	(wire
 		(pts
@@ -8375,7 +8375,7 @@
 			(uuid "7dcb7a9b-3dd5-4ece-a87e-7f6dfb9a7e65")
 		)
 		(pin "SYNC" output
-			(at 69.85 121.92 0)
+			(at 69.85 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8425,7 +8425,7 @@
 			(uuid "fd0fa223-5451-4253-9773-ba166c32f7f3")
 		)
 		(pin "ROM-CE3" output
-			(at 69.85 140.97 0)
+			(at 69.85 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
