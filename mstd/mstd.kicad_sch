@@ -8,6 +8,108 @@
 		(title "Main")
 	)
 	(lib_symbols
+		(symbol "Connector:TestPoint"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.762) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:C"
 			(pin_numbers hide)
 			(pin_names
@@ -2570,6 +2672,12 @@
 		(uuid "46e5ac98-17a7-4476-9b62-78f99b910dce")
 	)
 	(junction
+		(at 173.99 77.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4cbd8c82-7db5-4878-8910-84fb35ffb472")
+	)
+	(junction
 		(at 163.83 34.29)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2636,6 +2744,12 @@
 		(uuid "addbd4f1-8024-468d-915e-5f9398392c89")
 	)
 	(junction
+		(at 203.2 102.87)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c22f76eb-6615-46b7-b83f-1e9dd0d7d982")
+	)
+	(junction
 		(at 101.6 189.23)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2676,24 +2790,8 @@
 		(uuid "33306489-9040-4c71-b2f4-209131e45ff1")
 	)
 	(no_connect
-		(at 177.8 154.94)
-		(uuid "8ee7a07c-7592-4f60-a9d5-59143bb088b4")
-	)
-	(no_connect
-		(at 177.8 152.4)
-		(uuid "92952f72-29fb-46b3-8eb1-6e36237d07d2")
-	)
-	(no_connect
-		(at 177.8 160.02)
-		(uuid "98bc8f72-9386-469f-86cd-fafce44e0c3c")
-	)
-	(no_connect
 		(at 88.9 38.1)
 		(uuid "b1ee4fb5-65fb-4df8-9a4c-dcf44dc783f2")
-	)
-	(no_connect
-		(at 177.8 157.48)
-		(uuid "c73ae296-314a-4160-9504-2d4be0917b99")
 	)
 	(wire
 		(pts
@@ -2724,6 +2822,26 @@
 			(type default)
 		)
 		(uuid "01f09292-5068-4bc1-97ca-2a553e5c9e8a")
+	)
+	(wire
+		(pts
+			(xy 173.99 152.4) (xy 177.8 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02bb4ce4-3e4b-4f95-885d-2c8a743d4f1d")
+	)
+	(wire
+		(pts
+			(xy 200.66 82.55) (xy 203.2 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02e664eb-8ade-40c7-b6cf-57f3e91458ba")
 	)
 	(wire
 		(pts
@@ -2967,6 +3085,16 @@
 	)
 	(wire
 		(pts
+			(xy 193.04 82.55) (xy 173.99 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "205bce8f-37ed-4818-bf70-0f0e509783e4")
+	)
+	(wire
+		(pts
 			(xy 118.11 63.5) (xy 118.11 67.31)
 		)
 		(stroke
@@ -3207,6 +3335,16 @@
 	)
 	(wire
 		(pts
+			(xy 173.99 154.94) (xy 177.8 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3bb5b824-3323-4a22-bfd5-e2e3d009f5a3")
+	)
+	(wire
+		(pts
 			(xy 114.3 50.8) (xy 138.43 50.8)
 		)
 		(stroke
@@ -3234,6 +3372,16 @@
 			(type default)
 		)
 		(uuid "42403572-fad9-4d74-8c54-3431b6f10169")
+	)
+	(wire
+		(pts
+			(xy 203.2 102.87) (xy 205.74 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "43d3c524-364c-4e09-b4a1-051d3b47aebd")
 	)
 	(wire
 		(pts
@@ -3377,7 +3525,17 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 102.87) (xy 205.74 102.87)
+			(xy 173.99 157.48) (xy 177.8 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "532d1d0f-c93b-4ec1-b4f8-604550817146")
+	)
+	(wire
+		(pts
+			(xy 199.39 102.87) (xy 203.2 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3524,6 +3682,16 @@
 			(type default)
 		)
 		(uuid "690d64af-99bb-42af-8a43-605044e63b11")
+	)
+	(wire
+		(pts
+			(xy 173.99 160.02) (xy 177.8 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "691061c4-7da7-41ac-a798-108d3a2e3f54")
 	)
 	(wire
 		(pts
@@ -3747,6 +3915,16 @@
 	)
 	(wire
 		(pts
+			(xy 173.99 77.47) (xy 177.8 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e97b0b2-d524-4461-aeaa-c1cdefa161c1")
+	)
+	(wire
+		(pts
 			(xy 118.11 68.58) (xy 86.36 68.58)
 		)
 		(stroke
@@ -3854,6 +4032,16 @@
 			(type default)
 		)
 		(uuid "a0026713-39b1-466d-b4a6-1a152e3b710f")
+	)
+	(wire
+		(pts
+			(xy 173.99 82.55) (xy 173.99 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a12dc8ad-7be5-4357-b8d8-f4c0d57768e6")
 	)
 	(wire
 		(pts
@@ -4187,7 +4375,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 77.47) (xy 177.8 77.47)
+			(xy 167.64 77.47) (xy 173.99 77.47)
 		)
 		(stroke
 			(width 0)
@@ -4284,6 +4472,16 @@
 			(type default)
 		)
 		(uuid "e8f6dcfc-2f9a-4d04-bf60-c6ca586a5bb2")
+	)
+	(wire
+		(pts
+			(xy 203.2 82.55) (xy 203.2 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e9a3b9da-43b1-4e00-bb80-44f443574d31")
 	)
 	(wire
 		(pts
@@ -4862,6 +5060,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 173.99 157.48 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "16b5028a-aea3-4b38-a000-a332cadf2276")
+		(property "Reference" "TP3"
+			(at 170.688 152.4 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 170.688 154.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm"
+			(at 173.99 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 173.99 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 173.99 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a2311ba7-11d6-4945-9098-545a5885adaa")
+		)
+		(instances
+			(project "mstd"
+				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5"
+					(reference "TP3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 86.36 88.9 270)
 		(unit 1)
@@ -5020,7 +5285,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 89.8652 185.42 0)
 			(effects
 				(font
@@ -5339,6 +5604,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 196.85 82.55 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "39844567-6e6a-4bbc-bbe6-bef3a6b9f4e0")
+		(property "Reference" "C15"
+			(at 196.596 73.406 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1.0"
+			(at 196.85 77.47 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 200.66 81.5848 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 196.85 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 196.85 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "4b25153f-4448-45e5-af2e-26f1f0b3dec8")
+		)
+		(pin "1"
+			(uuid "c614dca1-b010-428f-8186-eef13d7617d8")
+		)
+		(instances
+			(project "mstd"
+				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5"
+					(reference "C15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 119.38 67.31 90)
 		(unit 1)
@@ -5430,7 +5762,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 149.86 72.6948 0)
 			(effects
 				(font
@@ -5497,7 +5829,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 217.17 33.528 90)
 			(effects
 				(font
@@ -5564,7 +5896,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 169.418 27.94 90)
 			(effects
 				(font
@@ -5601,6 +5933,73 @@
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5"
 					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 173.99 160.02 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4e59615f-3685-46c5-b966-307225fc0d07")
+		(property "Reference" "TP4"
+			(at 170.688 154.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 170.688 157.48 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm"
+			(at 173.99 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 173.99 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 173.99 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "39ff849a-b98e-4cc8-b004-179ecbd11e1b")
+		)
+		(instances
+			(project "mstd"
+				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5"
+					(reference "TP4")
 					(unit 1)
 				)
 			)
@@ -5767,7 +6166,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 165.862 69.85 90)
 			(effects
 				(font
@@ -6037,7 +6436,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 176.022 69.85 90)
 			(effects
 				(font
@@ -6147,6 +6546,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 173.99 152.4 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9ee310cf-ce96-4af8-958b-be86eba5f203")
+		(property "Reference" "TP1"
+			(at 170.688 147.32 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 170.688 149.86 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm"
+			(at 173.99 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 173.99 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 173.99 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a3be8f4c-ce6c-4a04-a59a-5e8b93123764")
+		)
+		(instances
+			(project ""
+				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5"
+					(reference "TP1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3V3")
 		(at 116.84 81.28 0)
 		(unit 1)
@@ -6213,6 +6679,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 173.99 154.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a256bced-1d7b-44f2-b68f-a84c55586fc3")
+		(property "Reference" "TP2"
+			(at 170.688 149.86 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 170.688 152.4 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm"
+			(at 173.99 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 173.99 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 173.99 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6c9c40dd-62d4-40bb-806d-2f388c086371")
+		)
+		(instances
+			(project "mstd"
+				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5"
+					(reference "TP2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 217.17 35.56 90)
 		(unit 1)
@@ -6237,7 +6770,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 217.17 37.338 90)
 			(effects
 				(font
@@ -6504,7 +7037,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 165.608 27.94 90)
 			(effects
 				(font
@@ -6638,7 +7171,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 102.5652 185.42 0)
 			(effects
 				(font
@@ -6705,7 +7238,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 130.048 31.75 90)
 			(effects
 				(font
@@ -6772,7 +7305,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 199.39 101.9048 0)
 			(effects
 				(font
@@ -7406,7 +7939,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 125.4252 185.42 0)
 			(effects
 				(font
@@ -7474,7 +8007,7 @@
 				)
 			)
 		)
-		(property "Footprint" "local1:SDD1306"
+		(property "Footprint" "local:SDD1306"
 			(at 191.77 55.88 0)
 			(effects
 				(font
@@ -7747,7 +8280,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 217.17 41.148 90)
 			(effects
 				(font
@@ -7814,7 +8347,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 112.7252 185.42 0)
 			(effects
 				(font
