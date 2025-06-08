@@ -9244,7 +9244,7 @@
 				)
 			)
 		)
-		(property "Footprint" "local:09722642801"
+		(property "Footprint" "local:09722642801-1"
 			(at 176.53 143.51 0)
 			(effects
 				(font
@@ -9523,7 +9523,7 @@
 				)
 			)
 		)
-		(property "Footprint" "local:09722642801"
+		(property "Footprint" "local:09722642801-1"
 			(at 90.17 41.91 0)
 			(effects
 				(font
@@ -10180,7 +10180,7 @@
 				)
 			)
 		)
-		(property "Footprint" "local:09722642801"
+		(property "Footprint" "local:09722642801-1"
 			(at 213.36 49.53 0)
 			(effects
 				(font
@@ -11606,7 +11606,7 @@
 				)
 			)
 		)
-		(property "Footprint" "local:09722642801"
+		(property "Footprint" "local:09722642801-1"
 			(at 111.76 113.03 0)
 			(effects
 				(font
@@ -14044,7 +14044,7 @@
 				)
 			)
 		)
-		(property "Footprint" "local:09722642801"
+		(property "Footprint" "local:09722642801-1"
 			(at 44.45 102.87 0)
 			(effects
 				(font

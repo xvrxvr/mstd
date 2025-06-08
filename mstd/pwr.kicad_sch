@@ -8568,7 +8568,7 @@
 				)
 			)
 		)
-		(property "Footprint" "local:09722642801"
+		(property "Footprint" "local:09722642801-1"
 			(at 124.46 153.67 0)
 			(effects
 				(font
