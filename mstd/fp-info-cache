@@ -1,4 +1,4 @@
-23676544761142308
+23678294147508653
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96650,6 +96650,13 @@ Connector
 66
 local
 09722642801
+09722642801-1
+Connector
+0
+66
+66
+local
+09722642801-1
 09722642801-1
 Connector
 0

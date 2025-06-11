@@ -1837,6 +1837,1088 @@
 				)
 			)
 		)
+		(symbol "UKNC_SEP_1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "X"
+				(at -31.242 0.254 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at -5.08 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -5.08 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at -5.08 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at -5.08 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "UKNC_SEP_1_1_1"
+				(rectangle
+					(start -29.21 40.64)
+					(end -5.08 -17.78)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 40.64) (xy -15.24 -17.78)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 -1.27) (xy -15.24 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "Control"
+					(at -17.018 -7.366 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(text "Data Bus"
+					(at -17.272 22.352 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -5.08 180)
+					(length 5.08)
+					(name "DIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -2.54 180)
+					(length 5.08)
+					(name "SINC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 25.4 180)
+					(length 5.08)
+					(name "DAL5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 20.32 180)
+					(length 5.08)
+					(name "DAL7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 15.24 180)
+					(length 5.08)
+					(name "DAL9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 10.16 180)
+					(length 5.08)
+					(name "DAL11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 0 180)
+					(length 5.08)
+					(name "DAL15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 30.48 180)
+					(length 5.08)
+					(name "DAL3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 35.56 180)
+					(length 5.08)
+					(name "DAL1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 5.08 180)
+					(length 5.08)
+					(name "DAL13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -15.24 180)
+					(length 5.08)
+					(name "BS7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -10.16 180)
+					(length 5.08)
+					(name "WTBT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -12.7 180)
+					(length 5.08)
+					(name "RPLY"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 27.94 180)
+					(length 5.08)
+					(name "DAL4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 22.86 180)
+					(length 5.08)
+					(name "DAL6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 17.78 180)
+					(length 5.08)
+					(name "DAL8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 12.7 180)
+					(length 5.08)
+					(name "DAL10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 33.02 180)
+					(length 5.08)
+					(name "DAL2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 38.1 180)
+					(length 5.08)
+					(name "DAL0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 7.62 180)
+					(length 5.08)
+					(name "DAL12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional inverted
+					(at 0 2.54 180)
+					(length 5.08)
+					(name "DAL14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -7.62 180)
+					(length 5.08)
+					(name "DOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "UKNC_SEP_1_2_1"
+				(rectangle
+					(start -29.21 2.54)
+					(end -5.08 -5.08)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 2.54) (xy -15.24 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "INT"
+					(at -17.018 -1.27 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 0 180)
+					(length 5.08)
+					(name "IRQ"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -2.54 180)
+					(length 5.08)
+					(name "IAKN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "UKNC_SEP_1_3_1"
+				(rectangle
+					(start -29.21 2.54)
+					(end -5.08 -15.24)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 2.54) (xy -15.24 -15.24)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 -8.89) (xy -15.24 -8.89)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 -1.27) (xy -15.24 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "Control"
+					(at -23.622 -3.302 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(text "MDC"
+					(at -17.018 -5.842 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -10.16 180)
+					(length 5.08)
+					(name "RUN1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 0 -2.54 180)
+					(length 5.08)
+					(name "CL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 0 180)
+					(length 5.08)
+					(name "INIT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -7.62 180)
+					(length 5.08)
+					(name "INDEX"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -12.7 180)
+					(length 5.08)
+					(name "RUN2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -5.08 180)
+					(length 5.08)
+					(name "MODE"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "UKNC_SEP_1_4_1"
+				(rectangle
+					(start -29.21 2.54)
+					(end -5.08 -7.62)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 2.54) (xy -15.24 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "ROM\nControl"
+					(at -17.272 -2.286 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -5.08 180)
+					(length 5.08)
+					(name "CE3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -2.54 180)
+					(length 5.08)
+					(name "CE2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 0 180)
+					(length 5.08)
+					(name "CE1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "UKNC_SEP_1_5_1"
+				(rectangle
+					(start -29.21 2.54)
+					(end -5.08 -7.62)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 2.54) (xy -15.24 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "DMA"
+					(at -17.018 -1.27 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -5.08 180)
+					(length 5.08)
+					(name "SACK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -2.54 180)
+					(length 5.08)
+					(name "DMR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 0 180)
+					(length 5.08)
+					(name "DMG0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "UKNC_SEP_1_6_1"
+				(rectangle
+					(start -29.21 2.54)
+					(end -5.08 -15.24)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 2.54) (xy -15.24 -15.24)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 -3.81) (xy -15.24 -3.81)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "Power"
+					(at -17.272 -8.636 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(text "Status"
+					(at -17.526 -1.778 900)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(pin power_out line
+					(at 0 -5.08 180)
+					(length 5.08)
+					(name "+5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 0 -7.62 180)
+					(length 5.08)
+					(name "+5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 0 180)
+					(length 5.08)
+					(name "DCOK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 0 -10.16 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 0 -12.7 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 0 -2.54 180)
+					(length 5.08)
+					(name "POK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "local1:74HCT05"
 			(pin_names
 				(offset 1.016)
@@ -8297,16 +9379,6 @@
 		)
 		(uuid "ffad809d-e3a1-4e23-88bf-b64e5ccf1ea9")
 	)
-	(text "SWAP PIN ORDER!!! A/B01-32 <-> A/B32-0"
-		(exclude_from_sim no)
-		(at 16.51 71.882 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "26e3f906-fc68-46f4-ba5a-cf0995259339")
-	)
 	(hierarchical_label "ROM-CE3"
 		(shape output)
 		(at 170.18 55.88 0)
@@ -8946,13 +10018,13 @@
 	(symbol
 		(lib_id "local1:74HCT05")
 		(at 243.84 50.8 0)
-		(unit 4)
+		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "0f488e2d-efc2-4b1c-85e6-6cc76f05e803")
-		(property "Reference" "U10"
+		(property "Reference" "U8"
 			(at 243.586 45.212 0)
 			(effects
 				(font
@@ -9041,8 +10113,8 @@
 		(instances
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
-					(reference "U10")
-					(unit 4)
+					(reference "U8")
+					(unit 1)
 				)
 			)
 		)
@@ -9712,7 +10784,7 @@
 	(symbol
 		(lib_id "local1:74HCT05")
 		(at 91.44 129.54 0)
-		(unit 1)
+		(unit 6)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -9808,7 +10880,7 @@
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
 					(reference "U8")
-					(unit 1)
+					(unit 6)
 				)
 			)
 		)
@@ -10764,7 +11836,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "36fd7280-fcd6-49b5-8390-270c293be9ec")
-		(property "Reference" "U8"
+		(property "Reference" "U10"
 			(at 139.7 39.37 0)
 			(effects
 				(font
@@ -10854,7 +11926,7 @@
 		(instances
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
-					(reference "U8")
+					(reference "U10")
 					(unit 6)
 				)
 			)
@@ -11479,14 +12551,14 @@
 	(symbol
 		(lib_id "local1:74HCT05")
 		(at 218.44 106.68 0)
-		(unit 6)
+		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "41188205-ce83-49e3-b9d3-eee2c99ed2f1")
-		(property "Reference" "U10"
+		(property "Reference" "U8"
 			(at 218.44 97.79 0)
 			(effects
 				(font
@@ -11574,8 +12646,8 @@
 		(instances
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
-					(reference "U10")
-					(unit 6)
+					(reference "U8")
+					(unit 3)
 				)
 			)
 		)
@@ -12916,13 +13988,13 @@
 	(symbol
 		(lib_id "local1:74HCT05")
 		(at 91.44 162.56 180)
-		(unit 2)
+		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "863a4975-5425-4508-8f5c-d7290fbddaaa")
-		(property "Reference" "U10"
+		(property "Reference" "U8"
 			(at 86.614 164.846 0)
 			(effects
 				(font
@@ -13011,8 +14083,8 @@
 		(instances
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
-					(reference "U10")
-					(unit 2)
+					(reference "U8")
+					(unit 4)
 				)
 			)
 		)
@@ -13090,7 +14162,7 @@
 	(symbol
 		(lib_id "local1:74HCT05")
 		(at 91.44 146.05 0)
-		(unit 3)
+		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -13188,7 +14260,7 @@
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
 					(reference "U8")
-					(unit 3)
+					(unit 5)
 				)
 			)
 		)
@@ -13330,20 +14402,18 @@
 	(symbol
 		(lib_id "local1:74HCT05")
 		(at 91.44 154.94 0)
-		(unit 4)
+		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "95ac883c-77c2-454f-b342-38b6c7aa4387")
-		(property "Reference" "U8"
-			(at 91.44 146.05 0)
+		(property "Reference" "U10"
+			(at 92.964 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Value" "74HCT05"
@@ -13427,8 +14497,8 @@
 		(instances
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
-					(reference "U8")
-					(unit 4)
+					(reference "U10")
+					(unit 2)
 				)
 			)
 		)
@@ -15058,14 +16128,14 @@
 	(symbol
 		(lib_id "local1:74HCT05")
 		(at 139.7 40.64 0)
-		(unit 5)
+		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d017f469-8a48-4387-8b96-b39e5930a133")
-		(property "Reference" "U8"
+		(property "Reference" "U10"
 			(at 139.7 31.75 0)
 			(effects
 				(font
@@ -15153,8 +16223,8 @@
 		(instances
 			(project "mstd"
 				(path "/83a6c476-134a-4a4c-b05a-3c6f7ef5b0c5/c6989856-7d6c-495d-a92f-ca8859aec99b"
-					(reference "U8")
-					(unit 5)
+					(reference "U10")
+					(unit 4)
 				)
 			)
 		)
@@ -15657,6 +16727,7 @@
 		)
 	)
 	(symbol
+		(lib_name "UKNC_SEP_1")
 		(lib_id "local1:UKNC_SEP")
 		(at 49.53 144.78 0)
 		(unit 1)
@@ -15762,7 +16833,7 @@
 		(pin "B22"
 			(uuid "92b9e837-07e8-4591-842d-2d538daed9ff")
 		)
-		(pin "B28"
+		(pin "B16"
 			(uuid "ad93dd1f-aa5e-4784-8d4a-f4e91a87af67")
 		)
 		(pin "A12"
