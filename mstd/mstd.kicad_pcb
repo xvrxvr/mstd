@@ -28086,7 +28086,7 @@
 		(layer "Edge.Cuts")
 		(uuid "93327335-058b-41a1-b161-c9367eb1ce10")
 	)
-	(gr_text "XVR-Product & Eduard Garanskij 2025\nУКНЦ-БК МСТД+"
+	(gr_text "XVR-Product & Eduard Garanskij 2025\nУКНЦ-БК МСТД+ V1.00"
 		(at 115.19 150.17 0)
 		(layer "F.SilkS")
 		(uuid "50710588-7d46-4e2e-8793-004c858ce596")
