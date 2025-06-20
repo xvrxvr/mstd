@@ -5263,7 +5263,7 @@
 				)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:TSSOP-24_L7.8-W4.4-P0.65-LS6.4-BL"
+		(property "Footprint" "Package_SO:SOP-24_7.5x15.4mm_P1.27mm"
 			(at 101.6 71.12 0)
 			(effects
 				(font
@@ -5406,7 +5406,7 @@
 				)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:TSSOP-24_L7.8-W4.4-P0.65-LS6.4-BL"
+		(property "Footprint" "Package_SO:SOP-24_7.5x15.4mm_P1.27mm"
 			(at 101.6 119.38 0)
 			(effects
 				(font
