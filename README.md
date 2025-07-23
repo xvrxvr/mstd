@@ -1,4 +1,4 @@
-﻿**UKNC-BK MSTD+**
+# UKNC-BK MSTD+
 
 **UKNC-BK MSTD+** is a universal external mass storage device designed to work simultaneously with two Soviet-era 16-bit computers from the 1980s: the *Elektronika BK0010/0011* and the *Elektronika MS0511 (UKNC)*.
 
@@ -17,38 +17,33 @@ To accommodate both, the board features two separate bus connectors—one for ea
 
 **Key Features**
 
-•	**Hardware**: Built on an ICE40UP5K FPGA and an ESP32 microcontroller.
-
-•	**Display**: Includes a small OLED screen for disk image selection and device configuration.
-
-•	**Storage**: Does **not** use SD cards. Disk images are uploaded via **Wi-Fi** and stored in the device’s internal Flash memory.
-
-•	**Power**: USB-C connector is used **only for additional power supply**.
-
-•	**Compatibility**: Works with both BK0010/BK0011 and UKNC (MS0511) computers.
+*	**Hardware**: Built on an ICE40UP5K FPGA and an ESP32 microcontroller.
+*	**Display**: Includes a small OLED screen for disk image selection and device configuration.
+*	**Storage**: Does **not** use SD cards. Disk images are uploaded via **Wi-Fi** and stored in the device’s internal Flash memory.
+*	**Power**: USB-C connector is used **only for additional power supply**.
+*	**Compatibility**: Works with both BK0010/BK0011 and UKNC (MS0511) computers.
 
 **Current Status (July 2027)**
 
-•	Custom PCB designed in KiCad
-
-•	Hardware assembly and testing in progress\
+*	Custom PCB designed in KiCad
+*	Hardware assembly and testing in progress\
 ![](pics/pcb.002.jpeg)
 
-**Additional Resources**
+# **Additional Resources**
 
-•	📺 **Elektronika MS0511 (UKNC) Review**
+##	📺 **Elektronika MS0511 (UKNC) Review**
 
 *The Clueless Engineer*
 
 [Watch on YouTube](https://www.youtube.com/watch?v=qSb77XoAgPw&ab_channel=TheCluelessEngineer)
 
-•	📚 **DEC PDP-11 Instruction Set Reference**
+##	📚 **DEC PDP-11 Instruction Set Reference**
 
 Official DEC documentation archive
 
 [View PDF](https://www.bitsavers.org/pdf/dec/pdp11/handbooks/PDP11_Handbook_1981.pdf)
 
-•	🖥️ **UKNC Emulator**
+##	🖥️ **UKNC Emulator**
 
 Cross-platform emulator for Elektronika MS0511
 
