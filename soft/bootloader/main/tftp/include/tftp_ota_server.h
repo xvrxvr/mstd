@@ -1,0 +1,65 @@
+/*
+    MIT License
+
+    Copyright (c) 2018, Alexey Dynda
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+*/
+
+/*
+Modified for MSTD+ project by XVR-Product
+*/
+
+#pragma once
+
+#include "tftp_server.h"
+#include <esp_ota_ops.h>
+#include <nvs_flash.h>
+
+class TftpOtaServer: public TFTP
+{
+public:
+    using TFTP::TFTP;
+
+protected:
+    int on_write(const char *file) override;
+    int on_write_data(uint8_t *buffer, int len) override;
+
+    int on_read(const char *file) override;
+    int on_read_data(uint8_t *buffer, int len) override;
+
+    void on_close() override;
+
+private:
+    esp_ota_handle_t m_ota_handle = 0;
+    const esp_partition_t* m_next_partition = nullptr;
+
+    enum Job {
+        J_None,
+        J_LoadFW,       // Load (write) firmware
+        J_LoadCfg,      // Load config
+        J_LoadFCfg,     // Load full config partititon
+        J_SendCfg,      // Send (read) config
+        J_SendFCfg      // Send full config partititon
+    } job = J_None;
+    size_t cur_ptr; // Shift to current part of load/save config (or partition)
+
+    Job test_file_name(const char* fname, bool is_write);
+    void inc_cur_ptr(size_t increment); // Add 'increment' to cur_ptr and update PI
+};
