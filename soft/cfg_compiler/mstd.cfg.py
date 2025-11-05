@@ -245,7 +245,7 @@ class ConfigData:
         fld = self.data[name]
         result = fld.value
         fld = fld.fld
-        if fld.fld_type != 'char':  # Not a string - integer
+        if fld.val_type != 'char':  # Not a string - integer
             return (result or 0).to_bytes(fld.size, byteorder='little', signed=fld.is_signed)
         if result is None:
             result = b''
@@ -281,16 +281,48 @@ class ConfigData:
         return ''.join(result)
 
     def set_toml_value(self, name: str, val: int|str):
-        pass
+        fld = self.data[name]
+        if fld.fld.enum_ref:
+            # We are enum. Only symbolic one supported
+            assert isinstance(val, str), f'Field "{name}" is a enum. String expected, but found {val}'
+            val = fld.fld.enum_ref.str2int(val)
+        if fld.fld.val_type == 'char':
+            # This is a string
+            assert isinstance(val, str), f'Field "{name}" is a string, but found {val}'
+            valb = val.encode()
+            if len(valb) > fld.fld.size:
+                print(f'WARNING: Field "{name}" overflow. Field size is {fld.fld.size}, but value ({val}) length is {len(valb)}. Truncated')
+                valb = valb[:fld.fld.size-1]
+            elif len(valb) == fld.fld.size:
+                print(f'WARNING: Field "{name}" overflow - no place for terminated Zero.')
+        else:
+            valb = val.to_bytes(fld.fld.size, byteorder='little', signed=fld.fld.is_signed) # Will rize OverflowError if integer can't be represented in given field size
+        fld.value = valb
 
     def set_binary_value(self, name: str, val: bytes):
-        pass
+        fld = self.data[name]
+        if fld.fld.val_type == 'char':
+            fld.value = val
+        else:
+            fld.value = val.from_bytes(byteorder='little', signed=fld.fld.is_signed)
 
     def set_full_toml(self, toml: dict[str, int|str], allow_unknown: bool):
-        pass
+        for key, val in toml.items():
+            if key not in self.data:
+                if allow_unknown:
+                    print(f'WARNING: Unknown field "{key}", ignored')
+                else:
+                    assert False, f'Unknown field "{key}"'
+            else:
+                self.set_toml_value(key, val)
 
     def set_full_binary(self, val: bytes, allow_errors: bool):
-        pass
+        for fld in self.cfg.cfg_struct:
+            if fld.is_filler:
+                zval = val[:fld.size]
+            else:
+                self.set_binary_value(fld.name, val[:fld.size])
+            val = val[fld.size:]
 
 def toml_repr(data: int|str) -> str:
     if isinstance(data, int):
