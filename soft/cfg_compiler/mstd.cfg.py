@@ -1,9 +1,14 @@
-﻿import re
+﻿#!/usr/bin/python3
+import argparse 
+import sys
+import re
+import os
 import tomllib
 
 from dataclasses import dataclass, field
 from typing import *
 from struct import unpack
+from socket import socket, setdefaulttimeout, AF_INET, SOCK_DGRAM
 
 @dataclass
 class EnumField:
@@ -46,7 +51,7 @@ class EnumDef:
         result = []
         processed = 0
         for name, value in self.toc.items():
-            if value & val:
+            if (value & val) == value:
                 pref, _, short = name.partition('_')
                 if pref in self.masks:
                     if (val & self.masks[pref]) != value:
@@ -64,7 +69,7 @@ class EnumDef:
     def str2int(self, val: str) -> int:
         result = 0
         for item in re.split(r'[\s,|]+', val):
-            if re.match(r'_|::|.', item):
+            if re.match(r'_|::|\.', item):
                 item = re.sub(r'_|::|\.', '_', item)
                 assert item in self.toc, f'Enum item  "{item}" not valid for Enum "{self.name}" (valid values are {list(self.toc.keys())})'
                 result |= self.toc[item]
@@ -72,7 +77,9 @@ class EnumDef:
                 v = self.short_toc[item]
                 assert v, f'Enum item  "{item}" is ambigous in Enum "{self.name}" (enum items are {list(self.toc.keys())})'
                 result |= self.toc[v]
-            else:
+            elif item in self.toc:
+                result |= self.toc[item]
+            elif item:
                 assert False, f'Short Enum item "{item}" is unknown for Enum "{self.name}" (valid values are {list(self.toc.keys())})'
         return result            
 
@@ -103,6 +110,11 @@ class CfgField:
     @property
     def is_filler(self) -> bool:
         return self.val_type == 'dummy'
+
+    @property
+    def is_string(self) -> bool:
+        return self.enum_ref or self.val_type == 'char'
+
 
 BASE_SIZES = {
     'int8_t' : 1, 'uint8_t':  1,
@@ -234,7 +246,7 @@ class ConfigData:
         result = fld.value
         fld = fld.fld
         if isinstance(result, bytes):
-            result = result.decode(errors='replace')
+            result = result.decode(errors='replace').rstrip('\0')
         elif isinstance(result, int) and fld.enum_ref:
             result = fld.enum_ref.int2str(result)
         elif result is None:
@@ -267,9 +279,14 @@ class ConfigData:
         assert len(bin_img) % 4 == 0
         size = len(bin_img)//4-1
         self.set_toml_value('size', size)
+        bin_img = self.get_full_binary()
         if set_crc:
             crc = eval_crc(bin_img[4:])
-            self.set_toml_value('crc', crc)
+        else:
+            if self.get_toml_value('crc'):
+                return
+            crc = 0xFFFFFFFF
+        self.set_toml_value('crc', crc)
 
     def get_full_toml(self, with_hidden_fields: bool = False) -> str:
         result = []
@@ -296,7 +313,8 @@ class ConfigData:
             elif len(valb) == fld.fld.size:
                 print(f'WARNING: Field "{name}" overflow - no place for terminated Zero.')
         else:
-            valb = val.to_bytes(fld.fld.size, byteorder='little', signed=fld.fld.is_signed) # Will rize OverflowError if integer can't be represented in given field size
+            val.to_bytes(fld.fld.size, byteorder='little', signed=fld.fld.is_signed) # Will rize OverflowError if integer can't be represented in given field size
+            valb = val
         fld.value = valb
 
     def set_binary_value(self, name: str, val: bytes):
@@ -304,7 +322,7 @@ class ConfigData:
         if fld.fld.val_type == 'char':
             fld.value = val
         else:
-            fld.value = val.from_bytes(byteorder='little', signed=fld.fld.is_signed)
+            fld.value = int.from_bytes(val, byteorder='little', signed=fld.fld.is_signed)
 
     def set_full_toml(self, toml: dict[str, int|str], allow_unknown: bool):
         for key, val in toml.items():
@@ -316,13 +334,57 @@ class ConfigData:
             else:
                 self.set_toml_value(key, val)
 
-    def set_full_binary(self, val: bytes, allow_errors: bool):
+    def set_full_binary(self, val: bytes):
         for fld in self.cfg.cfg_struct:
             if fld.is_filler:
                 zval = val[:fld.size]
             else:
                 self.set_binary_value(fld.name, val[:fld.size])
             val = val[fld.size:]
+
+    def is_binary_accepted(self, val: bytes) -> str:
+        warn = []
+        bh = decode_header(val)
+        assert bh.size <= len(val), f"Binary config too short: {len(val)} but expected {bh.size}\n"
+        if bh.size > len(val):
+            warn.append(f"{bh.size > len(val)} bytes of extra data at end of Binary config image\n")
+        if bh.crc == 0xFFFFFFFF:
+            warn.append("Autofilled CRC field detected in Binary config image. This is not safe\n")
+        else:
+            crc = eval_crc(val[4:])
+            assert bh.crc == crc, f'Wrong CRC of config: {crc:04X}, expected {bh.crc:04X}'
+        vers = self.get_toml_value('version')
+        assert (self.cfg.lc_version <= bh.version <= self.cfg.version), f'Binary config version {bh.version} not in expected range {self.cfg.lc_version} - {self.cfg.version}'
+        return ''.join(warn)
+
+    #### CL Interface ####
+    ## Load
+    def load_bin_config(self, val: bytes, force: int = 0):
+        if force < 2:
+                warn = self.is_binary_accepted(val)
+                if not force:
+                    assert not warn, f'This is not safe read config: {warn}Add -f flag to force reading'
+        self.set_full_binary(val)
+
+    def load_text_config(self, data: str, force: int = 0):
+        self.set_full_toml(tomllib.loads(data), force != 0)
+
+    def set_cl_value(self, val_name: str, val_value: str):
+        if not self.has_field(val_name):
+            print(f'{val_name} not found in config. Valid names are {", ".join(self.data.keys())}. Ignored')
+        else:
+            if not self.data[val_name].fld.is_string:
+                val_value = int(val_value, 0)
+            self.set_toml_value(val_name, val_value)
+
+    ## Save
+    def save_bin_config(self, unsafe_crc: bool) -> bytes:
+        self.patch_binary_image(not unsafe_crc)
+        return self.get_full_binary()
+
+    def save_text_config(self, unsafe_crg: bool, hidden_fields: bool) -> str:
+        self.patch_binary_image(not unsafe_crg)
+        return self.get_full_toml(hidden_fields)
 
 def toml_repr(data: int|str) -> str:
     if isinstance(data, int):
@@ -391,12 +453,308 @@ class BinHeader:
 
 def decode_header(val: bytes) -> BinHeader:
     crc, size, version = unpack('<IHB', val[:7])
+    size = (size & 0x3FF) * 4 + 4
     return BinHeader(crc, size, version)
 
+
+class TFTPClient:
+    # TFTP packet types
+    RRQ = 1
+    WRQ = 2
+    ACK = 4
+    DATA = 3
+    ERROR = 5
+
+    # TFTP protocol constatnts
+    DATA_SIZE = 512            # Block data size
+    BLK_SIZE = DATA_SIZE + 4   # Block size with header
+
+    # Setup
+    MAX_RETRY_COUNT = 10       # Maximum number of retries in timeout cases
+    SOCK_TOUT = 5              # Timeout of socket communication (in seconds)
+
+    def __init__(self, host: str):
+        self.addr = (host, 69)
+        setdefaulttimeout(self.SOCK_TOUT)
+        self.socket = socket(AF_INET, SOCK_DGRAM)
+
+    def send_xrq_packet(self, mode: int, file_name: str):
+        """
+                   2 bytes    string   1 byte     string   1 byte
+                   -----------------------------------------------
+            RRQ/  | 01/02 |  Filename  |   0  |    Mode    |   0  |
+            WRQ    -----------------------------------------------
+
+        """
+        result = bytearray([0, mode])
+        result += file_name.encode('utf-8')
+        result.append(0)
+        result += b'octet\0'
+        self.socket.sendto(result, self.addr)
+
+    def send_data_packet(self, data: bytes, pkt_n: int):
+        """
+                   2 bytes    2 bytes       n bytes
+                   ---------------------------------
+            DATA  | 03    |   Block #  |    Data    |
+                   ---------------------------------
+        """
+        result = bytearray([0, self.DATA])
+        result += pkt_n.to_bytes(2, byteorder='big')
+        result += data
+        self.socket.sendto(result, self.remote_addr)
+
+    def send_ack_packet(self, pkt_n: int):
+        """
+                   2 bytes    2 bytes
+                   --------------------
+            ACK   | 04    |   Block #  |
+                   --------------------
+        """
+        result = bytearray([0, self.ACK])
+        result += pkt_n.to_bytes(2, byteorder='big')
+        self.socket.sendto(result, self.remote_addr)
+
+    def decode_packet(self, data: bytes) -> tuple:
+        """
+            Return tuple <pkt-type, data ...>
+        """
+        if len(data) < 4:
+            return None
+        tp = data[:2].to_int(2, byteorder='big')
+        val = data[2:4].to_int(2, byteorder='big')
+        match tp:
+            case self.ACK:
+                return (tp, val)   # <ACK, PktN>
+            case self.DATA:
+                return (tp, val, data[4:]) # <DATA, PktN, data>
+            case self.ERROR:
+                """
+                         2 bytes  2 bytes        string    1 byte
+                         ----------------------------------------
+                  ERROR | 05    |  ErrorCode |   ErrMsg   |   0  |
+                         ----------------------------------------
+                """
+                return (tp, val, data[4:-1].decode('utf-8'))  # <ERROR, error-code, error-msg>
+            case _:
+                return None
+
+    def get_answer(self) -> tuple:
+        rcv_buffer, addr = self.socket.recvfrom(self.BLK_SIZE)        
+        assert addr[0] and addr[1], f"Host and port are invalid: {addr[0]}:{addr[1]}"
+        self.remote_addr = addr
+        rcvd_pkt = self.decode_packet(rcv_buffer)        
+        assert rcvd_pkt, f'TFTP Error: Unknown packet {rcv_buffer.hex()}'
+        assert rcvd_pkt[0] != self.ERROR, f"TFTP error: {rcvd_pkt[2]}"
+        return rcvd_pkt
+        
+    def send(self, fname: str, data: bytes, verbose: bool):
+        pkt_n = 0
+        start = 0
+        retry_count = 0
+        buffer = None
+        self.send_xrq_packet(self.WRQ, fname)
+        if verbose:
+            print(f'Sending {fname}:', end='\r', file=sys.stderr)
+            total = len(bytes)
+        while True:
+            try:
+                rcvd_pkt = self.get_answer()
+                if rcvd_pkt[0] == self.ACK and rcvd_pkt[1] == (pkt_n & 0xFFFF):
+                    buffer = data[start:(self.DATA_SIZE + start)]
+                    pkt_n += 1
+                    start += self.DATA_SIZE
+                    retry_count = 0
+                    if verbose:
+                        print(f'Sending {fname}: {start*100//total}%', end='\r', file=sys.stderr)
+                    self.send_data_packet(pkt_n, buffer)
+                    if len(buffer) < self.DATA_SIZE: # If our DATA block is less than 512 bytes, then that was the last packet
+                        break
+            except TimeoutError:
+                retry_count += 1
+                assert retry_count < self.MAX_RETRY_COUNT, 'Too many attempts to retransmit, giving up!'
+                if buffer:
+                    self.send_data_packet(pkt_n, buffer)
+                else:
+                    self.send_xrq_packet(self.WRQ, fname)
+        if verbose:
+            print(f'Sending {fname}: 100%', file=sys.stderr)
+
+    def read(self, fname: str) -> bytearray:
+        result = bytearray()
+        pkt_n = 1
+        retry_count = 0
+        self.send_xrq_packet(self.RRQ, fname)
+        while True:
+            try:
+                rcvd_pkt = self.get_answer()
+                if rcvd_pkt[0] == self.DATA:
+                    _, in_pkt_n, data = rcvd_pkt
+                    if in_pkt_n == (pkt_n & 0xFFFF):
+                        result += data
+                        if len(data) < self.DATA_SIZE: # Last packet was recieved
+                            break                                                                   
+                        self.send_ack_packet(pkt_n)
+                        pkt_n += 1
+                        retry_count = 0
+                    else:
+                        self.send_ack_packet(pkt_n)
+            except TimeoutError:
+                retry_count += 1
+                assert retry_count < self.MAX_RETRY_COUNT, 'Too many attempts to read, giving up!'
+                if pkt_n == 1:
+                    self.send_xrq_packet(self.RRQ, fname)
+                else:
+                    self.send_ack_packet(pkt_n)
+        return result
+
+class ConfigImage:
+    def __init__(self, file_name: str, mode: str = '', quiet: bool = False):
+        """
+            Open file/TFTP for read/write
+            file_name is a file name, or '-' (for stdout/stdin)
+            of MSTD[:[:][//]<IP or host-name>]
+
+            mode is optional (for TFTP only): 
+                full - use 'full.cfg' for file name
+                FW - use 'fw.bin' for file name
+                else - use 'cfg.cfg' for file name 
+        """
+        self.quiet = quiet
+        if file_name == 'MSTD' or file_name.startswith('MSTD:'):
+            self.kind = 'T' # TFTP
+            self.file_name = {'full': 'full.cfg', 'FW': 'fw.bin'}.get(mode or '', 'cfg.cfg')
+            if file_name == 'MSTD':
+                self.ip = '192.168.4.1'
+            else:
+                mtch = re.match(r'MSTD::?(//)?(.*)$', file_name)
+                assert mtch, f'Wrong format of MSTD name: {file_name}'
+                self.ip = mtch.group(2)
+        else:
+            self.kind = 'b' if file_name.endswith('.bin') else 't'
+            self.file_name = file_name
+            if file_name == '-':
+                self.kind = '-'
+            assert not mode, f'Expected MSTD or MSTD://<ip or name>, but got {file_name}'
+
+    @property
+    def is_binary(self) -> bool:
+        """
+            TFTP always binary
+            File is binary if its name ends with '.bin'
+        """
+        return self.kind[0] != 't'
+
+    @property
+    def value(self) -> str|bytes:
+        match self.kind:
+            case 'T':
+                return TFTPClient(self.ip).read(self.file_name)
+            case '-':
+                return sys.stdin.readall()
+            case _:
+                with open(self.file_name, 'r' + self.kind) as f:
+                    return f.read()
+
+    @value.setter
+    def value(self, value: bytes|str):
+        match self.kind:
+            case 'T':
+                TFTPClient(self.ip).send(self.file_name, value, not self.quiet)
+            case '-':
+                sys.stdout.write(value)
+            case _:
+                with open(self.file_name, 'w' + self.kind) as f:
+                    f.write(value)
+
+def is_full_config_name(fname: str) -> bool:
+    return fname.endswith('full.cfg')
+
+def is_fw_file(fname: str) -> bool:
+    if not fname.endswith('.bin'):
+        return False
+    return  os.path.getsize(fname) > 102400
 #################################################################################################
 
-c = Config('setup_data.h')
-cd = ConfigData(c)
+def main():
+    parser = argparse.ArgumentParser(prog='MSTD config/fw uploader', description='Upload and download configs and firmware to MSTD')
+    parser.add_argument('src_config', help='Source configuration (you can specify multiple source files, all of them will be joined) or firmware file. Use MSTD or MSTD://<ip or host name> to connect to MSTD') 
+    parser.add_argument('dst_config', default=None, nargs='?', help='Destination configuration. Use "-" to dump to stdout, use MSTD or MSTD://<ip or host name> to connect to MSTD')
+    parser.add_argument('argument_override', nargs='*', help='Config values override in form <key>=<value>. String <value> should NOT be enclosed in any quotes')
+    parser.add_argument('-c', '--config', default='setup_data.h', help='C++ config file with binary Config structure')
+    parser.add_argument('-b', '--bypass', action='store_true', help='Force direct copy of one binary config to another (by default binary config passed through type check)')
+    parser.add_argument('-n', '--new', action='store_true', help='Creates new Config file. There is no Source Config')
+    parser.add_argument('-u', '--update', action='store_true', help='Update Config file in-place. First Source Config will be used as Destination Config too')
+    parser.add_argument('-f', '--force', default=0, action="count", help='Force action even if some errors possible (can be used up to 2 times)') 
+    parser.add_argument('--unsafe-crc', action='store_true', help='Do not write CRC field in config image. MSTD loader will writes CRC themselves. This is inherently unsafe, do not use.')
+    parser.add_argument('--hidden-fields', action='store_true', help='Include hidden fields in Text dump of config')
+    parser.add_argument('-q', '--quiet', action='store_true', help='Quiet operation - do not print progress on FW download')
 
-print(cd.get_full_toml(True))
+    args = parser.parse_args()
 
+    files = [args.src_config]
+    if args.dst_config:
+        files.append(args.dst_config)
+    files.extend(args.argument_override)
+
+    arg_override = []
+    src_files = []
+    for f in files:
+        if '=' in f:
+            key, _, val = f.partition('=')
+            arg_override.append((key.strip(), val))
+        else:
+            src_files.append(f)
+    assert src_files, "At least one Configuration file expected"
+
+    if args.new:
+        assert len(src_files) == 1, f'--new mode required exactly one Config name, but found {len(src_files)}'
+        dst_file = src_files.pop()
+    elif args.update:
+        dst_file = src_files[0]
+    else:
+        assert len(src_files) > 1, f'Source and Destination Configs expected'
+        dst_file = src_files.pop()
+
+    cfg = Config(args.config)  # TODO: Make search for config on some predefiend pathes
+
+    if len(src_files) == 1 and is_fw_file(src_files[0]) and dst_file.startswith('MSTD'):
+        assert not arg_override, f'Firmware update assumed no Values override'
+        src = ConfigImage(src_files[0])
+        dst = ConfigImage(dst_file, 'FW', quiet=args.quiet)
+        dst.value = src.value        
+    elif args.bypass:
+        # Do not create ConfigData - just directly load and save binary images
+        assert len(src_files) == 1 and dst_file and not arg_override, f'Direct copy assumed exactly one source and destination config and no Values override'
+
+        if is_full_config_name(src_files[0]) or is_full_config_name(dst_file):
+            extra = 'full'
+        else:
+            extra = ''
+        src = ConfigImage(src_files[0], extra)
+        dst = ConfigImage(dst_file, extra)
+        assert src.is_binary and dst.is_binary, f'Both SRC and DST in bypass mode should be of binary type'
+        dst.value = src.value
+    else:
+        cdata = ConfigData(cfg)
+        for f in src_files:
+            src = ConfigImage(f)
+            if src.is_binary:
+                cdata.load_bin_config(src.value, args.force)
+            else:
+                cdata.load_text_config(src.value, args.force)
+        for name, val in arg_override:
+            cdata.set_cl_value(name, val)
+        dst = ConfigImage(dst_file)
+        if dst.is_binary:
+            dst.value = cdata.save_bin_config(args.unsafe_crc)
+        else:
+            dst.value = cdata.save_text_config(args.unsafe_crc, args.hidden_fields)
+            
+if __name__ == "__main__":
+    try:
+        main()
+    except AssertionError as exp:
+        print(f'ERROR: {exp}', file=sys.stderr)
+    except FileNotFoundError as exp:
+        print(f'ERROR: File error - {exp}', file=sys.stderr)
