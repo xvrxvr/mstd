@@ -371,10 +371,18 @@ void SSD1306::setup_pi_row(int row)
 
 void SSD1306::inc_pi()
 {
-    if (pi_count >= 128)
+    if (++pi_count >= 128)
     {
-        if (pi_data != 0xFF) {(pi_data <<= 1) |= 1; pi_count=0;}
-        else setup_pi_row(pi_row+1);
+        if (pi_data != 0xFF) 
+        {
+            uint8_t new_pi_data = (pi_data << 1) | 1;
+            setup_pi_row(pi_row);
+            pi_data = new_pi_data;
+        }
+        else 
+        {
+            setup_pi_row(pi_row+1);
+        }
     }
     uint8_t d[] = {CB_Data, pi_data};
     send_cmd({CMD(d)});

@@ -245,7 +245,7 @@ class ConfigData:
         fld = self.data[name]
         result = fld.value
         fld = fld.fld
-        if isinstance(result, bytes):
+        if isinstance(result, (bytes, bytearray)):
             result = result.decode(errors='replace').rstrip('\0')
         elif isinstance(result, int) and fld.enum_ref:
             result = fld.enum_ref.int2str(result)
@@ -492,7 +492,7 @@ class TFTPClient:
         result += b'octet\0'
         self.socket.sendto(result, self.addr)
 
-    def send_data_packet(self, data: bytes, pkt_n: int):
+    def send_data_packet(self, pkt_n: int, data: bytes):
         """
                    2 bytes    2 bytes       n bytes
                    ---------------------------------
@@ -521,8 +521,8 @@ class TFTPClient:
         """
         if len(data) < 4:
             return None
-        tp = data[:2].to_int(2, byteorder='big')
-        val = data[2:4].to_int(2, byteorder='big')
+        tp = int.from_bytes(data[:2], byteorder='big')
+        val = int.from_bytes(data[2:4], byteorder='big')
         match tp:
             case self.ACK:
                 return (tp, val)   # <ACK, PktN>
@@ -556,7 +556,7 @@ class TFTPClient:
         self.send_xrq_packet(self.WRQ, fname)
         if verbose:
             print(f'Sending {fname}:', end='\r', file=sys.stderr)
-            total = len(bytes)
+            total = len(data)
         while True:
             try:
                 rcvd_pkt = self.get_answer()
@@ -592,9 +592,9 @@ class TFTPClient:
                     _, in_pkt_n, data = rcvd_pkt
                     if in_pkt_n == (pkt_n & 0xFFFF):
                         result += data
+                        self.send_ack_packet(pkt_n)
                         if len(data) < self.DATA_SIZE: # Last packet was recieved
                             break                                                                   
-                        self.send_ack_packet(pkt_n)
                         pkt_n += 1
                         retry_count = 0
                     else:
