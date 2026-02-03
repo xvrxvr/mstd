@@ -39,7 +39,4 @@ void hw_init();
 
 inline void msg(const char* msg) {oled.draw_text(OLED_MSG_ROW, msg);}
 
-extern uint8_t fpga_image[];
-extern size_t fpga_image_size;
-
 void load_fpga();

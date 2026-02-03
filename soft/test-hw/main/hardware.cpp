@@ -56,6 +56,11 @@ void hw_init()
 
 #define ERROR_CHECK(m, val) if (!(val)) {msg("ERR: " m); return;}
 
+
+extern const char test1_test_imp_bin_start[] asm("_binary_test1_test_imp_bin_start");
+extern const char test1_test_imp_bin_end[] asm("_binary_test1_test_imp_bin_end");
+
+
 void load_fpga()
 {
     spi_transaction_t t{0};
@@ -79,7 +84,7 @@ void load_fpga()
     gpio_set_level(PIN_SPI_SS, 1);
     SEND_ZERO_BYTE("Tr6");
     gpio_set_level(PIN_SPI_SS, 0);
-    SEND_BUF("Tr8", fpga_image, fpga_image_size*8);
+    SEND_BUF("Tr8", test1_test_imp_bin_start, (test1_test_imp_bin_end-test1_test_imp_bin_start)*8);
     gpio_set_level(PIN_SPI_SS, 1);
     int cnt = 0;
     SETUP_ZERO_BYTE;
