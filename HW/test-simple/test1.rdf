@@ -2,7 +2,10 @@
 <RadiantProject version="4.2" radiant="2025.1.1.308.0" title="test1" device="iCE40UP5K-SG48I" performance_grade="High-Performance_1.2V" family_int="ice40tp" device_int="itpa08" package_int="SG48" operation_int="IND" speed_int="6" default_implementation="test_imp">
     <Options/>
     <Implementation title="test_imp" dir="test_imp" description="test_imp" synthesis="lse" default_strategy="Strategy1">
-        <Options/>
+        <Options def_top="top"/>
+        <Source name="source/test_imp/main.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="top"/>
+        </Source>
         <Source name="source/test_imp/test_imp.pdc" type="Physical Constraints File" type_short="PDC">
             <Options/>
         </Source>
