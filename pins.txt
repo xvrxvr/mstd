@@ -1,0 +1,81 @@
+﻿ESP32
+
+IO36 - Sensor-VP - CI0 Left
+IO39 - Sensor-VN - CI1 Hit
+IO34 - CI2             Up
+IO35 - CI3             Right
+IO32 - CIO0            Down
+
+IO33 - CIO1            I2C-SCL
+IO25 - CIO2            I2C-SDA
+
+IO26 - CIO3            ROM-DIS3 (MON)   OUT  (1 - disable)
+IO27 - CIO4            S-UKNC           IN
+IO13 - CIO5            ROM-DIS1 (BAS)   OUT  (1 - disable)
+IO21 - CIO6            S-BK             IN
+IO19 - CIO7            ROM-DIS2 (BAS3)  OUT  (1 - disable)
+
+    ESP -> FPGA
+IO23 - CDONE           FPGA -> ESP32   (OC)
+IO22 - ~CRESET         ESP32 -> FPGA
+IO18 - IOB-29b
+IO5  - IOB-31b
+IO17 - IOB-32a-SPI_SO
+IO16 - IPB-33b-SPI_SI
+IO4  - IOB-34a-SPI_SCK
+IO2  - IOB-35b-SPI_SS
+
+
+FPGA
+IOB-13b - FIO0            D3
+IOB-16a - FIO1            D2
+IOB-18a - FIO2            D1
+IOB-20a - FIO3            D0
+IOB-22a - FIO4            T/~R    OUT  [0 - read (BK -> FPGA), 1 - write (FPGA -> BK)]
+IOB-23b - FIO5            WTB     IN
+IOB-24a - FIO6            RUN     OUT  (1 - active)
+ION-25b-G3 - FIO7         CE3     IN
+IOB-0a                    D9
+IOB-2a                    D8
+IOB-3b-G6                 D11
+IOB-4a                    D7
+IOB-5b                    D10
+IOB-6a                    D6
+IOB-8a                    D4
+IOB-9b                    D5
+
+IOT-37a        INIT        OUT   (1 - reset)
+IOT-38b        ROM-CE1     IN
+IOT-39a        ROM-CE2     IN
+IOT-41a        IRQ         OUT   (1 - IRQ)
+IOT-42b        RPLY        OUT   (1 - Replay strobe)
+IOT-43a        DOUT        IN
+IOT-44b        DIN         IN
+IOT-45a-G1     SYNC        IN
+IOT-46b-G0     IAKN        IN
+IOT-48b        D15
+IOT-49a        D12
+IOT-50b        D14
+IOT-51a        D13
+
+=======================================
+FPGA config (pp31-34):
+
+1. CRESET <= 0, SPI_SS <= 0, SPI_SCK <= 1
+2. wait 200nS
+3. CRESET <= 1
+4. wait > 1.2mS (no SCK)
+5. SPI_SS <= 1
+6. Run SCK for 8 ticks
+7. SPI_SS <= 0
+8. Send data:
+    MSB first, on faling edge of SCK
+9. SPI_SS <= 1
+10. wait for CDONE => 1  (still generating clocks). Max 100 clocks
+11. send 49 more SCK ticks
+
+SCK Freq - 1-25 MHz
+=======================================
+
+C sensor (5 wire flat cable) - 100-130pF/50cm (dry). Wet 130->330 pF
+C sensor (PCB) - 270pF
