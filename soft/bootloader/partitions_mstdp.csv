@@ -5,7 +5,7 @@ phy_init, data, phy,        0xf000,   0x1000,
 otadata,  data, ota,       0x10000,   0x2000,
 config,   data, undefined, 0x12000,   0x1000,
 # Hole
-loader,   app,  test,    , 1M,
+loader,   app,  test,    0x20000, 1M,
 ota_0,    app,  ota_0,   , 3M,
 ota_1,    app,  ota_1,   , 3M,
 storage,  data, spiffs,  , -16M,

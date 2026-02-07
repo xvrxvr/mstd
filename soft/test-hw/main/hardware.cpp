@@ -54,7 +54,12 @@ void hw_init()
     oled.init();
 }
 
-#define ERROR_CHECK(m, val) if (!(val)) {msg("ERR: " m); return;}
+#define ERROR_CHECK(m, val) if (val) \
+{ \
+    char mmm[128]; \
+    sprintf(mmm, "ERR: " m " %d", val); \
+    msg(mmm); return; \
+}
 
 
 extern const char test1_test_imp_bin_start[] asm("_binary_test1_test_imp_bin_start");
@@ -81,10 +86,23 @@ void load_fpga()
     vTaskDelay(ms2ticks(1));
     gpio_set_level(PIN_CRESET, 1);
     vTaskDelay(ms2ticks(2));
+    if (gpio_get_level(PIN_CDONE))
+    {
+        msg("Tr0: CDONE stack");
+        return;
+    }
     gpio_set_level(PIN_SPI_SS, 1);
     SEND_ZERO_BYTE("Tr6");
     gpio_set_level(PIN_SPI_SS, 0);
-    SEND_BUF("Tr8", test1_test_imp_bin_start, (test1_test_imp_bin_end-test1_test_imp_bin_start)*8);
+    int bytes_to_send = test1_test_imp_bin_end-test1_test_imp_bin_start;
+    const char* p = test1_test_imp_bin_start;
+    while(bytes_to_send)
+    {
+        size_t len = std::min(64, bytes_to_send);
+        SEND_BUF("Tr8", p, len*8);
+        bytes_to_send -= len;
+        p += len;
+    }
     gpio_set_level(PIN_SPI_SS, 1);
     int cnt = 0;
     SETUP_ZERO_BYTE;
